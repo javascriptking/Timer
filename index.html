@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+		center {
+			margin-top: 200px;
+		}
+		input {
+       width:30px;
+       height: 20px;
+      margin: 5px;
+      border: 2px solid black;
+				border-radius: 4px;
+		}
+		button{
+			margin: 5px;
+		}	
+		.Kasten {
+			  margin-top: 200px;
+			  width: 330px;
+              border:  3px solid black;
+              border-radius: 500px;
+              padding: 2em;
+              background-color:yellow;
+			}
+
+			button {
+				border: 2px solid black;
+				border-radius: 4px;
+			}
+	</style>
+	<title>Timer</title>
+</head>
+<body>
+	<center>
+		<div class="Kasten">
+<h1>Timer</h1>
+<h2 id="timer"></h2>
+<input type="number" id="inputm" ><input type="number" id="inputs"><br>
+<p></p>
+<button id="continue" onclick="continuetime()">Continue</button>
+<button id="start" onclick="start()">Start</button><button onclick="stop()">Stop</button><button onclick="deletetimer()">Delete</button>
+</div>
+</center>
+<script type="text/javascript">
+	document.getElementById('timer').style.display = "";
+	document.getElementById('continue').style.display = "none";
+	var rtime;
+	var rseconds;
+	var rminutes;
+	var time;
+	var go;
+	function deletetimer() {
+     	clearInterval(go);
+        rtime = 0;
+        document.getElementById('timer').style.display = "none";
+        document.getElementById('timer').innerHTML = rtime; 
+        document.getElementById('continue').style.display = "none";
+        document.getElementById('start').style.display = "";
+        document.getElementById('inputm').style.display = "";
+        document.getElementById('inputs').style.display = "";
+     	console.log("delete");
+     }
+	function continuetime() {
+        go = setInterval(timestart, 1000);
+     	console.log("continue");
+     }
+	 function stop() {
+     	clearInterval(go);
+     	console.log("stop");
+     }
+      
+ 
+ 
+	function start() {
+		document.getElementById('timer').style.display = "";
+		document.getElementById('continue').style.display = "";
+    document.getElementById('inputs').style.display = "none";
+		document.getElementById('inputm').style.display = "none";
+    document.getElementById('continue').style.display = "";
+    document.getElementById('start').style.display = "none";
+    rminutes = document.querySelector("#inputm").value;
+	rseconds = document.querySelector("#inputs").value;
+	var min = false;
+	
+	if (rseconds <= 9 && min == false) {
+     	rtime = (rminutes + ".0" + rseconds + " minutes");
+     }
+     if (rseconds >= 10 && min == false) {
+     	rtime = (rminutes + "." + rseconds + " minutes");
+     }
+
+	 if (rminutes <= 0) {
+     if (rseconds <= 9) {
+     	rtime = ("0" + rseconds + " seconds");
+     	console.log(rtime);
+	 document.getElementById('timer').innerHTML = rtime; 
+     }
+     
+     if (rseconds >= 10) {
+     	rtime = (rseconds + " seconds");
+     	console.log(rtime);
+	  document.getElementById('timer').innerHTML = rtime; 
+     }
+     }
+    console.log(rtime);
+    
+    document.getElementById('timer').innerHTML = rtime; 
+    go = setInterval(timestart, 1000);
+	}
+
+	function timestart() {
+     rseconds--;
+     if (rminutes == 0 && rseconds == 0) {
+     	document.getElementById('timer').innerHTML = 0;
+     	return stop();
+     }
+     if (rseconds == -1) {
+     	rminutes--;
+     	rseconds = 59;
+     }
+    
+       if (rseconds >= 10) {
+     	rtime = (rminutes + "." + rseconds + " minutes");
+     	console.log(rtime);
+	  document.getElementById('timer').innerHTML = rtime; 
+     }
+     if (rseconds <= 9 ) {
+     	rtime = (rminutes + ".0" + rseconds + " minutes");
+     	console.log(rtime);
+	 document.getElementById('timer').innerHTML = rtime; 
+     }
+
+     if (rminutes <= 0) {
+     if (rseconds <= 9) {
+     	rtime = ("0" + rseconds + " seconds");
+     	console.log(rtime);
+	 document.getElementById('timer').innerHTML = rtime; 
+     }
+     
+     if (rseconds >= 10) {
+     	rtime = (rseconds + " seconds");
+     	console.log(rtime);
+	  document.getElementById('timer').innerHTML = rtime; 
+     }
+     }
+        function stop() {
+     	clearInterval(go);
+     	console.log("stop");
+     }
+	}
+</script>
+</body>
+</html>
